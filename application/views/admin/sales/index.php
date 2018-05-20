@@ -98,7 +98,7 @@ $(function(){
                   $(".ajax_content_inner").html(data.html);
                 }
                   var img =$.each(data.product_photo ,function(data,success){
-                     var product_img = '<center><img style="height:200px;width:150px; margin-top:20px;" alt="BRAND IMG" src="uploads/'+this.brand_img+'"/></center>';                         
+                     var product_img = '<center><img style="height:200px;max-width:150px; margin-top:20px;" alt="BRAND IMG" src="uploads/'+this.brand_img+'"/></center>';                         
                      $(".img").append(product_img);
                   });
             });
@@ -107,7 +107,7 @@ $(function(){
     $(document).ready(function() {
       var currentDate = new Date(); 
       $(".datepicker").datepicker({
-      	dateFormat: 'dd/mm/yy'
+      	format: 'yyyy-mm-dd'
       });
       $('#datepicker').datepicker('setDate', 'today');
     });
