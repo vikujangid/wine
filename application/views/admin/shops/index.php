@@ -15,14 +15,14 @@ $(function(){
 		
 		<div class="portlet box grey-cascade">
 			<div class="portlet-title">
-				<div class="caption"><i class="fa fa-building-o"></i>All Shops</div>
+				<div class="caption"><i class="fa fa-building-o"></i>Shops</div>
 			</div>
 			<div class="portlet-body">
 				<div class="table-toolbar">
 					<div id="alert_area"></div>
 					<div class="row">
 						<div class="col-md-12">
-							<div class="btn-group tooltips" data-original-title="<?php echo $this->lang->line('Add_New_Industry'); ?>">
+							<div class="btn-group tooltips" data-original-title="Shop">
 								<a href="<?php echo base_url('shops/add'); ?>" class="btn green add_link"><?php echo $this->lang->line('Add_New'); ?>  Add Shop<i class="fa fa-plus"></i></a>
 							</div>
 
@@ -51,9 +51,7 @@ $(function(){
 							</tr>
 						</thead>
 						<tbody>
-							<?php
-							if(sizeof($records)>0) {
-							 foreach ($records as $key => $value) { ?>
+							<?php foreach ($records as $key => $value) { ?>
 								<tr>
 								
 								<td>
@@ -89,23 +87,11 @@ $(function(){
 									<a data-toggle="modal" data-id="<?php echo $value->id; ?>" data-url="<?php echo base_url('shops/delete/'.$value->id); ?>" class="btn btn-danger tooltips" onClick="deleteRecord(this);" data-original-title="Click to delete this shop" data-placement="top" data-container="body"><i class="fa fa-remove"></i></a>
 								</td>							
 							</tr>	
-							<?php } 
-							} else { ?>
-								<tr>
-								<td colspan="10"><div class="no-record"><?php echo $this->lang->line('No_record_found'); ?></div></td>
-								</tr>
-
-							<?php } ?>					
+							<?php }  ?>
+											
 						</tbody>
 					</table>
-					<!-- <div class="row">
-						<div class="col-md-5 col-sm-12"></div>
-						<div class="col-md-7 col-sm-12">
-							<div class="pull-right">
-								<?php echo $paging; ?>
-							</div>
-						</div>
-					</div> -->
+					
 					
 				</div>
 			</div>

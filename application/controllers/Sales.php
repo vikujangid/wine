@@ -11,7 +11,7 @@ class Sales extends CI_Controller
 	{
 		parent::__construct(); 
         $this->common_model->check_user_must_login();
-      	$this->load->model('product_list_model','products');
+      	$this->load->model('product_list_model','product_list');
       	$this->load->model('brands_model','brands');
       	$this->load->model('shop_brands_model');
       	$this->load->model('shops_model', 'shops');
@@ -23,7 +23,7 @@ class Sales extends CI_Controller
   		$output['page_title'] = "";
  
   		$shops = $this->shops->get_records();
-  		$brands = $this->products->get_brand();
+  		$brands = $this->product_list->get_brand();
   		$output['shops'] = $shops;
   		$output['brand'] = $brands;
   
@@ -41,14 +41,14 @@ class Sales extends CI_Controller
 			    $sold_date = date('Y-m-d',strtotime($this->input->post('date')));
 			    $brand_id = $this->input->post('brand_id');
 			    $size = $this->input->post('size');
-			    $this->products->delete_brand_sizes($brand_id,$sold_date,$shop_id);
+			    $this->product_list->delete_brand_sizes($brand_id,$sold_date,$shop_id);
 
 			    foreach ($size as $key => $value) {
 
         			$price = $this->shop_brands_model->get_price($shop_id, $brand_id, $key);
 
         			if (!$price)
-          				$price =  $this->products->get_price($brand_id,$key);
+          				$price =  $this->product_list->get_price($brand_id,$key);
         			
         			$data_insert = array();
 			        $data_insert['shop_id'] = $shop_id;
@@ -61,7 +61,7 @@ class Sales extends CI_Controller
 			        $data_insert['quantity_sold'] = $value['quantity_sold'];
 			        $data_insert['quantity_remaining'] = $data_insert['quantity_initial'] + $data_insert['quantity_credit'] - $value['quantity_sold'] - $data_insert['quantity_shipped'];
 			        $data_insert['price'] = $price * $data_insert['quantity_sold'];
-			        $this->products->add_sale_quantity($data_insert);
+			        $this->product_list->add_sale_quantity($data_insert);
 			    }
       			$response['selfReload'] = false;   
     		} else {
@@ -91,12 +91,12 @@ class Sales extends CI_Controller
 	        $sizes[$value->size_type]['brand_id'] = $value->brand_id;
 	        $sizes[$value->size_type]['size_in_ml'] = $value->size_in_ml;
 	        $sizes[$value->size_type]['price'] = $value->price;
-	        $sizes[$value->size_type]['quantity_initial'] = $this->products->get_last_remainings($brand_id, $date, $shop_id, $value->size_type);
+	        $sizes[$value->size_type]['quantity_initial'] = $this->product_list->get_last_remainings($brand_id, $date, $shop_id, $value->size_type);
 	        $sizes[$value->size_type]['quantity_credit'] = '';
 	        $sizes[$value->size_type]['quantity_shipped']  = '';
 	        $sizes[$value->size_type]['quantity_sold'] = '';
 
-	        $result = $this->products->get_sold_units($brand_id,$date,$shop_id,$value->size_type);
+	        $result = $this->product_list->get_sold_units($brand_id,$date,$shop_id,$value->size_type);
 	        
 	        if ($result) {
 
@@ -115,19 +115,21 @@ class Sales extends CI_Controller
       	echo json_encode($data); 
    }
 
-  public function table()
+  public function report()
   {
-    $all_shops = $this->products->get_product();
-    $output['all_shops'] = $all_shops;
-    $output['left_menu'] = "Sales";
-     $shop_id = $this->input->post('shop_id');
-     $date = date("Y-m-d",strtotime($this->input->post('date')));
-     $sale_list = $this->products->product_sale_list($shop_id,$date);
+      $shops = $this->shops->get_records();
+      $output['shops'] = $shops;
+      $output['left_menu'] = "Reports";
+      $shop_id = $this->input->get('shop_id');
+      $date = $this->input->get('date')?$this->input->get('date'):date("Y-m-d");
+      $date = date("Y-m-d",strtotime($date));
+
+     $sale_list = $this->product_list->product_sale_list($shop_id,$date);
      $product_sale = array();
       foreach ($sale_list as $key => $value) 
       {
         $brand_id = $value->brand_id;
-        $brand_name = $this->products->get_brand($brand_id);
+        $brand_name = $this->product_list->get_brand($brand_id);
 
          foreach ($brand_name as $key => $value_for_brand_name) 
           {
@@ -140,10 +142,12 @@ class Sales extends CI_Controller
       }
     
      $output['sale_list'] = $sale_list; 
+     $output['shop_id'] = $shop_id; 
+     $output['date'] = $date; 
      $output['product_sale'] = $product_sale; 
     
    $this->load->view('admin/includes/header',$output);
-   $this->load->view('admin/sales/list'); 
+   $this->load->view('admin/sales/report'); 
    $this->load->view('admin/includes/footer'); 
  }
 

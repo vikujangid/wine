@@ -13,7 +13,7 @@ $(function(){
 	<div class="col-md-12">
 		<div class="portlet box grey-cascade">
 			<div class="portlet-title">
-				<div class="caption"><i class="fa fa-building-o"></i>Find Your Sales</div>
+				<div class="caption"><i class="fa fa-building-o"></i>Find Any Sale</div>
 			 </div>
 			<div class="portlet-body">
 				<div class="table-toolbar">
@@ -23,20 +23,21 @@ $(function(){
 				  </div>
 				<br>
 				<div class="ajax_content">
-         <?php echo form_open(site_url('sales/table')); ?>
+          <form method="get" action="<?php echo site_url('sales/report'); ?>">
+         
           <div class="row">
              <div class="col-md-2 col-sm-2"> </div>
              <div class="col-sm-3" >
               
                  <select class="form-control" name="shop_id">
-                   <?php foreach ($all_shops as $key) {?>
-                   <option class="form-control" value="<?php  echo $key->id;?>"><?php echo $key->shop_name;?></option>
+                   <?php foreach ($shops as $key => $value) {?>
+                    <option class="form-control" value="<?php  echo $value->id;?>" <?php if ($shop_id == $value->id) { ?> selected="" <?php } ?> ><?php echo $value->shop_name;?></option>
                    <?php }?>
                  </select>
              </div>
              
              <div class="col-sm-3 ">
-                  <input type="text"  name="date"  placeholder="Enter date" id="datepicker"  class="form-control"/>
+                  <input type="text" value="<?php echo $date; ?>"  name="date"  placeholder="Enter date" id="datepicker"  class="form-control"/>
                   <?php echo form_error('date', '<div class="error" style="color:red;">', '</div>'); ?>
                   <h5 style="color:red"><center><b><?php echo validation_errors(); ?></b></center></h5>
              </div> 
@@ -109,7 +110,7 @@ $(function(){
                     <?php foreach ($product_sale as $key => $value) { ?>
                       <tr>
                         <td style="width:18%;"><?php echo @$key;?></td>
-                          <?php foreach ($value as $key => $sale_value) {  ?>
+                          <?php foreach ($value as $keys => $sale_value) {  ?>
                           
                             <td style="width:6.8%;"><?php echo @$sale_value['Full']?@$sale_value['Full']: 0 ;?></td>
                             <td style="width:6.8%;"><?php echo @$sale_value['Half']?@$sale_value['Half']: 0 ;?></td>
@@ -130,10 +131,11 @@ $(function(){
         </div>
       </div>
 <script>
-            $(document).ready(function() {
+          $(document).ready(function() {
             var currentDate = new Date(); 
-            $("#datepicker").datepicker({dateFormat: 'yy-mm-dd'} );
-            $('#datepicker').datepicker('setDate', 'today');});
+            $("#datepicker").datepicker({format: 'yyyy-mm-dd'} );
+            //$('#datepicker').datepicker('setDate', 'today');
+          });
 </script>
 
        </div>

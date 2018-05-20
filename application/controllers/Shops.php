@@ -5,25 +5,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	function __construct() 
     { 
 	    parent::__construct(); 
-	    if(!$this->session->userdata('user_id'))
-	    return redirect('login');
-	    $this->load->library('form_validation');
-	    $this->load->helper('form');
-	    $this->load->helper('url');
-	    $this->load->library('email');
-	    $this->load->library('session'); 
-	    $this->load->helper('string');
-	   	$this->load->database();
-	    $this->load->model('shops_model');
+	    $this->common_model->check_user_must_login();
+	    $this->load->model('shops_model', 'shops');
     }	   
         
 	public function index()
     {
     	$output['left_menu'] = "Shops";
-        $output['left_submenu'] = "";
-        $output['page_title'] = "";
-    	$records = $this->shops_model->get_all_shops();
+        $output['left_submenu'] = "Shops";
+        $output['page_title'] = "Shops";
+
+    	$records = $this->shops->get_records();
     	$output['records'] = $records;
+
     	$this->load->view('admin/includes/header', $output);
     	$this->load->view('admin/shops/index'); 
     	$this->load->view('admin/includes/footer');  	
@@ -31,7 +25,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     public function add() 
   	{
-        $output = array();
         $output['shop_name'] = '';
         $output['shop_owner_name'] = '';
         $output['shop_address'] = '';
@@ -65,7 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		        $dbD['shop_owner_mobile_number'] = $this->input->post('shop_owner_mobile_number');        
 		        $dbD['shop_email_address'] = $this->input->post('shop_email_address');
 
-	        	$this->shops_model->add_new_shop($dbD);
+	        	$this->shops->add_new_shop($dbD);
 	            $message = "Shop added";
 	            $response['redirectURL'] = site_url('shops');
 
@@ -82,7 +75,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	public function edit($shop_id)
 	{	
-    	$row = $this->shops_model->get_shop_record_by_id($shop_id);
+    	$row = $this->shops->get_shop_record_by_id($shop_id);
     	$output = array();
     	$output['shop_id'] = $row->id;
         $output['shop_name'] = $row->shop_name;
@@ -118,7 +111,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		        $dbD['shop_owner_mobile_number'] = $this->input->post('shop_owner_mobile_number');        
 		        $dbD['shop_email_address'] = $this->input->post('shop_email_address');
 
-	        	$this->shops_model->update_shop($shop_id, $dbD);
+	        	$this->shops->update_shop($shop_id, $dbD);
 	            $message = "Shop Updated";
 	            $response['redirectURL'] = site_url('shops');
 
@@ -134,12 +127,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
    }
     public function delete($record_id)
 	{
-	  $this->shops_model->delete_shop($record_id);
+	  $this->shops->delete_shop($record_id);
 	  redirect('shops/show');
 	}
     public function check_email_already_exist($email,$shopId)
 	{
-	  $shop = $this->shops_model->check_email_already_exist($email,$shopId);
+	  $shop = $this->shops->check_email_already_exist($email,$shopId);
 	   if($shop)
 	    {
 	     $this->form_validation->set_message('check_email_already_exist','Email Address already exist');

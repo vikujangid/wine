@@ -21,31 +21,31 @@
 				</li>
 				<li class="start <?php echo isset($left_menu) && $left_menu == 'Brands'?'active':''; ?>">
 					<a href="<?php echo site_url('brands'); ?>">
-					<i class="icon-home"></i>
+					<i class="fa fa-beer"></i>
 					<span class="title">Brands</span>
 					</a>
 				</li>
 				<li class="start <?php echo isset($left_menu) && $left_menu == 'Expenses'?'active':''; ?> ">
 					<a href="<?php echo site_url('expenses'); ?>">
-					<i class="icon-home"></i>
+					<i class="fa fa-money "></i>
 					<span class="title">Expenses</span>
 					</a>
 				</li>
 				<li class="start <?php echo isset($left_menu) && $left_menu == 'Shops'?'active':''; ?>">
 					<a href="<?php echo site_url('shops'); ?>">
-					<i class="icon-home"></i>
+					<i class="fa fa-university"></i>
 					<span class="title">Shops</span>
 					</a>
 				</li>
-				<li class="start <?php echo isset($left_menu) && $left_menu == 'sales table'?'active':''; ?>">
-					<a href="<?php echo site_url('sales/table'); ?>">
-					<i class="icon-home"></i>
-					<span class="title">Table</span>
+				<li class="start <?php echo isset($left_menu) && $left_menu == 'Reports'?'active':''; ?>">
+					<a href="<?php echo site_url('sales/report'); ?>">
+					<i class="fa fa-print"></i>
+					<span class="title">Report</span>
 					</a>
 				</li>
 				<li class="start ">
 					<a href="<?php echo site_url('register/logout'); ?>">
-					<i class="icon-home"></i>
+					<i class="fa fa-sign-out "></i>
 					<span class="title">Logout</span>
 					</a>
 				</li>

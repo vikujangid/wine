@@ -6,16 +6,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
    {
 	      function __construct() 
         { 
-            parent::__construct(); 
-            if(!$this->session->userdata('user_id'))
-            return redirect('login');
-            $this->load->library('form_validation');
-            $this->load->helper('form');
-            $this->load->helper('url');
-            $this->load->library('email');
-            $this->load->library('session'); 
-            $this->load->helper('string');
-           	$this->load->database();
+            parent::__construct();
+
+            $this->common_model->check_user_must_login();
+            $this->load->model('shops_model', 'shops');
             $this->load->model('shop_brands_model');
       	}
 
@@ -63,18 +57,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     		  }
           $output['all_brands'] = $all_brands;
           $output['shop_name'] = $shop_name;
-          $this->load->view('admin/includes/header',$output);
+          $this->load->view('admin/includes/header', $output);
           $this->load->view('admin/shop_brands/index'); 
           $this->load->view('admin/includes/footer');
 
     		
-        }        
-
-        
-        
-
-
-
-
-
+        }
 }
