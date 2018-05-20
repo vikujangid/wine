@@ -15,4 +15,20 @@ class Product_sale_model extends CI_Model {
         $this->db->insert($this->table);
         return $this->db->insert_id();
     }
+    function get_total_price($shop_id, $sold_date, $brand_id)
+    {
+        $this->db->where('shop_id', $shop_id);
+        $this->db->where('sold_date', $sold_date);
+        $this->db->where('brand_id', $brand_id);
+
+        $query = $this->db->get($this->table);
+        $result = $query->result();
+
+        $price = 0;
+        foreach ($result as $key => $value) {
+           $price = $value->price + $price; 
+        }  
+        return $price;         
+
+    }
 }

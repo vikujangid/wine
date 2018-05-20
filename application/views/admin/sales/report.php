@@ -44,6 +44,9 @@ $(function(){
                
              <div class="col-md-2 col-sm-2"> 
                  <input type="submit" value="Find" name="submit" class="btn btn-primary"/>
+                 <?php if($print_link) { ?>
+                  <a href="<?php echo $print_link; ?>" target="_blank" class="btn btn-info">Print</a>
+                  <?php } ?>
              </div>
              <div class="col-md-2 col-sm-2"> </div>   
           

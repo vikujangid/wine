@@ -37,6 +37,16 @@ class Expensive_model extends CI_Model {
         $this->db->where('id', $id);
         $this->db->update($this->table);
    }
+   function get_total_expenses($shop_id, $from_date, $to_date)
+   {
+        $this->db->select('SUM(amount) AS amount');
+        $this->db->where('shop_id',$shop_id);
+        $this->db->where('date >=',$from_date);
+        $this->db->where('date <=',$to_date);
+        $query = $this->db->get($this->table);
+        $result = $query->row();
+        return $result->amount?$result->amount:0;
+   }
 
   //////////////////////////////////////////
 

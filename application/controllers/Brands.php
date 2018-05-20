@@ -55,6 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $output['id'] = "";
 
             if ($_POST) {
+                $failure = FALSE;
                 $message = FALSE;
             	  $success = TRUE;
 

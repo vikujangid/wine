@@ -15,7 +15,8 @@ class Sales extends CI_Controller
       	$this->load->model('product_sale_model','product_sales');
       	$this->load->model('brands_model','brands');
       	$this->load->model('shop_brands_model');
-      	$this->load->model('shops_model', 'shops');
+        $this->load->model('shops_model', 'shops');
+      	$this->load->model('expensive_model', 'expenses');
     }
     function index() 
     {
@@ -147,6 +148,10 @@ class Sales extends CI_Controller
       $output['shop_id'] = $shop_id; 
       $output['date'] = $date; 
       $output['product_sale'] = $product_sale; 
+      $output['print_link'] = NULL;
+
+      if($shop_id)
+        $output['print_link'] = site_url('sales/print?date='.$date.'&shop_id='.$shop_id); 
 
       $this->load->view('admin/includes/header', $output);
       $this->load->view('admin/sales/report'); 
@@ -162,6 +167,7 @@ class Sales extends CI_Controller
       $date = date("Y-m-d",strtotime($date));
 
       $sale_list = $this->product_list->product_sale_list($shop_id,$date);
+      //pr($sale_list); die;
 
       $product_sale = array();
 
@@ -173,18 +179,22 @@ class Sales extends CI_Controller
               $value->brand_name =  $value_for_brand_name->brand_name;
           }
 
-          $product_sale[$value->brand_name]['initial'][$value->size_type] = $value->quantity_initial;
-          $product_sale[$value->brand_name]['credit'][$value->size_type] = $value->quantity_credit;
-          $product_sale[$value->brand_name]['shipped'][$value->size_type] = $value->quantity_shipped;
-          $product_sale[$value->brand_name]['sold'][$value->size_type] = $value->quantity_sold;
+          $product_sale[$value->brand_name]['loop']['initial'][$value->size_type] = $value->quantity_initial;
+          $product_sale[$value->brand_name]['loop']['credit'][$value->size_type] = $value->quantity_credit;
+          $product_sale[$value->brand_name]['loop']['shipped'][$value->size_type] = $value->quantity_shipped;
+          $product_sale[$value->brand_name]['loop']['sold'][$value->size_type] = $value->quantity_sold;
+          $product_sale[$value->brand_name]['loop']['rate'][$value->size_type] = round($value->rate_per_unit);
+          $product_sale[$value->brand_name]['total_price'] = $this->product_sales->get_total_price($shop_id, $date, $value->brand_id);
+
       }
+      $output['total_expenses'] = $this->expenses->get_total_expenses($shop_id, $date, $date);
+      
       $output['sale_list'] = $sale_list; 
       $output['shop_id'] = $shop_id; 
       $output['date'] = $date; 
       $output['product_sale'] = $product_sale; 
 
-      $this->load->view('admin/includes/header', $output);
-      $this->load->view('admin/sales/report'); 
-      $this->load->view('admin/includes/footer'); 
+      $this->load->view('admin/sales/print', $output); 
+      
   }
 }
