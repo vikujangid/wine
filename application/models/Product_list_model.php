@@ -46,7 +46,7 @@ class Product_list_model extends CI_Model {
   }
   function add_sale_quantity($data_insert){
       $this->db->set($data_insert);
-      $this->db->set('add_date',date("Y-m-d"));
+      $this->db->set('add_date',date("Y-m-d H:i:s"));
       $this->db->insert('product_sale');
       return $this->db->insert_id();
   }

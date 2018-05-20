@@ -58,8 +58,8 @@ $(function(){
             <label>Select Brand</label>
                   
             <div class="list-group ">
-              <?php foreach ($brand as $key) {?>
-                <a data-value="<?php  echo $key->id;?>" onclick="selectBrandOnClick(this)" class="list-group-item brand_list"><?php echo $key->brand_name;?></a>
+              <?php foreach ($brands as $key => $value) {?>
+                <a data-value="<?php  echo $value->id;?>" onclick="selectBrandOnClick(this)" class="list-group-item brand_list"><?php echo $value->brand_name;?></a>
               <?php } ?>
             </div>
           </div>
