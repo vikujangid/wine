@@ -10,6 +10,8 @@
 
       function get_brands($status =NULL)
       {
+         if ($status)
+            $this->db->where('status', $status);
          $query = $this->db->get('tbl_wine_brands');
          $result = $query->result();
          return $result;
@@ -45,11 +47,12 @@
 
       public function add_brand($data,$image_name = NULL) 
       {
-         $this->db->set('add_date',date("Y-m-d"));
          $this->db->set('brand_name',$data);
-         if($image_name){
-         $this->db->set('brand_img',$image_name);
+         
+         if ($image_name) {
+             $this->db->set('brand_img',$image_name);
          }
+         $this->db->set('add_date',date("Y-m-d"));
          $this->db->insert('tbl_wine_brands');
          return $this->db->insert_id();
       }

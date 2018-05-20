@@ -5,16 +5,27 @@
    
       function __construct() 
       { 
-         parent::__construct(); 
-         $this->table = "tbl_shops";
+          parent::__construct(); 
+          $this->table = "tbl_shops";
       }
 
       function get_records() 
       {  
-         $query = $this->db->get($this->table);
-         $result = $query->result();
-         return $result;
+          $query = $this->db->get($this->table);
+          $result = $query->result();
+          return $result;
       }
+      function get_shop_name($id)
+      {
+          $this->db->select('shop_name');
+          $this->db->where('id', $id);
+          $query = $this->db->get($this->table);
+          $result = $query->row();
+          return $result->shop_name?$result->shop_name:NULL;
+
+
+
+   }
 
 
 

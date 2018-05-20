@@ -3,12 +3,6 @@
 		echo '<div class="alert alert-success">' . $this->session->flashdata('message') . '</div>';
 	}
 ?>
-<script type="text/javascript">
-
-$(function(){
-	submitSearchData();
-});
-</script>
 <div class="row">
    <div class="col-md-12">
 	<div class="portlet box grey-cascade">
@@ -30,7 +24,7 @@ $(function(){
             <div class="col-sm-6" >
               <form action="<?php echo site_url('expenses/show'); ?>" method="get" >
                  <select class="form-control shop_id" name="shop_id">
-	                  <?php foreach ($all_shops as $key) {?>
+	                  <?php foreach ($shops as $key) {?>
 	                  <option class="form-control" value="<?php  echo $key->id;?>"><?php echo $key->shop_name;?></option>
 	                  <?php }?>
                  </select><br/>

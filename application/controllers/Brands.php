@@ -8,15 +8,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         function __construct() 
         { 
             parent::__construct();
-            $this->common_model->check_user_must_login();''
+            $this->common_model->check_user_must_login();
             $this->load->library('email');
             $this->load->model('brands_model', 'brands');
         }
 
         public function index()
         {  
-          $all_brands = $this->brands->get_brands();          
-          $output['all_brands'] = $all_brands;
+          $brands = $this->brands->get_brands();          
+          $output['brands'] = $brands;
           $output['left_menu'] = "Brands";
           $output['left_submenu'] = "Brand_Index";
           $output['page_title'] = "";
@@ -27,7 +27,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         public function add() 
         {
-            $output = array();
+            $output['left_menu'] = "Brands";
+            $output['left_submenu'] = "Brand_Index";
+            $output['page_title'] = "";
+
+            
             $output['brand_name'] = '';
             $output['size_type_of_full'] = false;
             $output['size_in_ml_of_full'] = '';
@@ -45,9 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $output['size_in_ml'] = '';
             $output['price'] = '';
             $output['status'] = '';
-            $output['left_menu'] = "";
-            $output['left_submenu'] = "";
-            $output['page_title'] = "";
+            
             $output['question'] = "";
             $output['question'] = "";
             $output['id'] = "";
@@ -75,29 +77,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 }
 
                 if($this->form_validation->run())
-                {   
-                 
-                   $directory = './uploads'; 
-                   @mkdir($directory, 0777); 
-                   @chmod($directory,  0777);  
-                   $config['upload_path'] = $directory;
-                   $config['allowed_types'] = 'gif|jpeg|jpg|png';            
-                   $config['encrypt_name'] = TRUE;
-                   $this->load->library('upload', $config);
-                   $this->upload->initialize($config);
-                   if ($this->upload->do_upload('product_photo')) 
-                   {  
-                     $image_data = $this->upload->data();
-                     $file_name = $image_data['file_name'];
-                     $image_name = $file_name;
-                     $brand_name = $this->input->post('brand_name');
-                     $brand_id = $this->brands->add_brand($brand_name,$image_name);
+                {
+                    $directory = './uploads'; 
+                    @mkdir($directory, 0777); 
+                    @chmod($directory,  0777);  
                     
-                    } else {
-                       $brand_name = $this->input->post('brand_name');
-                       $brand_id = $this->brands->add_brand($brand_name);
-
+                    $config['upload_path'] = $directory;
+                    $config['allowed_types'] = 'gif|jpeg|jpg|png';            
+                    $config['encrypt_name'] = TRUE;
+                    $this->load->library('upload', $config);
+                    $this->upload->initialize($config);
+                    
+                    $image_name = NULL;
+                    
+                    if ($this->upload->do_upload('product_photo')) {
+                        $image_data = $this->upload->data();
+                        $file_name = $image_data['file_name'];
+                        $image_name = $file_name;
                     }
+                    $brand_name = $this->input->post('brand_name');
+                    $brand_id = $this->brands->add_brand($brand_name, $image_name);
                     
                     if($this->input->post('size_type_of_full'))
                     {
@@ -144,10 +143,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $this->load->view('admin/includes/footer');   
         }
 
-        public function update($brand_id){
+        public function update($brand_id)
+        {
+            $output['left_menu'] = "Brands";
+          $output['left_submenu'] = "Brand_Index";
+          $output['page_title'] = "Brands";
  
-            $output['left_submenu'] = "";
-            $output['page_title'] = "Update Brand";
+            
             $output['id'] = $brand_id;
             $output['brand_id'] = $brand_id;
             $row = $this->brands->get_category_record_by_id($brand_id);

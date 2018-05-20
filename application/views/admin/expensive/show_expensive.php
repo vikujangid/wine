@@ -9,7 +9,7 @@ $(function(){
   <div class="col-md-12">
 	<div class="portlet box grey-cascade">
 	  <div class="portlet-title">
-		<div class="caption"><i class="fa fa-building-o"></i>Select Shop - <?php echo $shop_name; ?></div>
+		<div class="caption"><i class="fa fa-building-o"></i>Expenses - <?php echo $shop_name; ?></div>
 	  </div>
 		<div class="portlet-body">
 		   <div class="table-toolbar">
@@ -35,7 +35,7 @@ $(function(){
             <?php foreach ($records as $key => $value) {?>
                 <tr>
                     <td><?php echo $value->title; ?></td>
-                    <td><?php echo $value->add_date; ?></td>
+                    <td><?php echo $value->date; ?></td>
                     <td><?php echo $value->amount; ?></td>
                     <td>
                        <a href="<?php echo base_url('expenses/edit/'.$value->id); ?>" class="btn btn-info">Edit</a>
@@ -51,10 +51,3 @@ $(function(){
 	</div>
   </div>
 </div>
-
-<script type="text/javascript">
-            $(document).ready(function() {
-            var currentDate = new Date(); 
-            $("#datepicker").datepicker({dateFormat: 'yy-mm-dd'} );
-            $('#datepicker').datepicker('setDate', 'today');});
-</script>

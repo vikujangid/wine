@@ -16,7 +16,7 @@ $(function(){
 		
 		<div class="portlet box grey-cascade">
 			<div class="portlet-title">
-				<div class="caption"><i class="fa fa-building-o"></i>All Brands</div>
+				<div class="caption"><i class="fa fa-building-o"></i>Brands</div>
 			</div>
 			<div class="portlet-body">
 				<div class="table-toolbar">
@@ -42,7 +42,7 @@ $(function(){
 						    </thead>
 						<tbody>
 							<?php
-							 foreach ($all_brands as $key => $value) { ?>
+							 foreach ($brands as $key => $value) { ?>
 								<tr>
 								
 								<td>

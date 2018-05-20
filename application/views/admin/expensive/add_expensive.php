@@ -9,12 +9,12 @@ $(function(){
   <div class="col-md-12">
    <div class="portlet box grey-cascade">
     <div class="portlet-title">
-     <div class="caption"><i class="fa fa-building-o"></i>Select Shop</div>
+     <div class="caption"><i class="fa fa-building-o"></i>Add Expensive - <?php echo $shop_name; ?></div>
 	 </div>
 	   <div class="portlet-body">
 		<div class="table-toolbar">
 		 <div id="alert_area"></div>
-		  <form action="<?php echo current_url(); ?>" method="post" >
+		  <form class="ajax_form" action="<?php echo current_url(); ?>" method="post" >
             <div class="row">
 		      <div class="col-md-12">
 			   <div class="btn-group tooltips"  ></div>
@@ -44,6 +44,7 @@ $(function(){
 <script type="text/javascript">
              $(document).ready(function() {
             var currentDate = new Date(); 
-            $("#datepicker").datepicker({dateFormat: 'yy-mm-dd'} );
-            $('#datepicker').datepicker('setDate', 'today');});
+            $("#datepicker").datepicker({format: 'yyyy-mm-dd'} );
+            //$('#datepicker').datepicker('setDate', 'today');
+          });
 </script>
