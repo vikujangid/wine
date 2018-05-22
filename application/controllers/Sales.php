@@ -110,9 +110,11 @@ class Sales extends CI_Controller
 	        }
       	}
         $output['sizes'] = $sizes;
-      	$html = $this->load->view('admin/sales/sales_ajax_form',$output, true); 
+        $html = $this->load->view('admin/sales/sales_ajax_form',$output, true); 
+      	$html2 = $this->load->view('admin/sales/sales_ajax_form_side_table',$output, true); 
       	$data['success'] = true;
-      	$data['html'] = $html;
+        $data['html'] = $html;
+      	$data['html2'] = $html2;
       	$product_photo = $this->brands->get_brand_photo($brand_id);
       	$data['product_photo'] = $product_photo;
       	echo json_encode($data); 

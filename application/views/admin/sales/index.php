@@ -19,8 +19,17 @@ $(function(){
 
           <div class="form-body">
             <div class="col-md-2">
-              <div class="img"></div>
+              <div class="form-group">
+                <label>Select Brand</label>
+                      
+                <div class="list-group ">
+                  <?php foreach ($brands as $key => $value) {?>
+                    <a data-value="<?php  echo $value->id;?>" onclick="selectBrandOnClick(this)" class="list-group-item brand_list"><?php echo $value->brand_name;?></a>
+                  <?php } ?>
+                </div>
+              </div>
             </div>
+            
             <div class="col-md-8">
               <div class="">
                 <div class="col-md-3">
@@ -32,7 +41,7 @@ $(function(){
                     <?php } ?>
                     </select> 
                     
-                </div>
+                  </div>
                 </div>
                 <div class="col-md-1">
                 </div>
@@ -54,16 +63,9 @@ $(function(){
               </div>
             </div>
             <div class="col-md-2">
-            <div class="form-group">
-            <label>Select Brand</label>
-                  
-            <div class="list-group ">
-              <?php foreach ($brands as $key => $value) {?>
-                <a data-value="<?php  echo $value->id;?>" onclick="selectBrandOnClick(this)" class="list-group-item brand_list"><?php echo $value->brand_name;?></a>
-              <?php } ?>
+              <div class="img"></div>
+              <div class="ajax_total_chart">250</div>
             </div>
-          </div>
-        </div>
       </div>
       <input type="hidden" class="form-control" name="brand_id" id= "brand_id" onchange="getsize()">
       <?php echo form_close(); ?>
@@ -111,6 +113,25 @@ $(function(){
       });
       $('#datepicker').datepicker('setDate', 'today');
     });
+</script>
+<script type="text/javascript">
+  $(function(){
+    $(document).on("keypress",'body',function(e){
+      
+    //$(document).keypress(function(e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 40) {
+          e.preventDefault();
+            $(".brand_list.active").next().trigger('click');
+            return false;
+        } else if (code == 38) {
+          e.preventDefault();
+            $(".brand_list.active").prev().trigger('click');
+            return false;
+        }
+        
+    });
+  })
 </script>
 
        </div>

@@ -479,15 +479,15 @@ $this->load->view('admin/includes/common'); ?>
 	<?php $this->load->view('admin/includes/left_menu'); ?>
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
-		<div class="page-content">
+		<div class="page-content" style="padding-top: 0px; ">
 			<!-- BEGIN PAGE HEAD -->
-			<div class="page-head">
-				<!-- BEGIN PAGE TITLE -->
+			<!-- <div class="page-head">
+				
 				<div class="page-title">
-					<h1></h1>
+					<h1>ssdds</h1>
 				</div>
-				<!-- END PAGE TITLE -->
-			</div>
+				
+			</div> -->
 			<div class="row">
 				<div class="col-md-12">
 					<div class="alert_area">
