@@ -44,7 +44,7 @@
 				</div>				
 			</div>
 			<div class="portlet-body form">
-				<?php echo form_open_multipart('brands/update/'.$brand_id); ?>
+				<?php echo form_open_multipart('brands/update/'.$brand_id, array('class' => 'ajax_form')); ?>
 
 				
 					<div class="form-body">                               
@@ -52,7 +52,7 @@
 							<label for="form_control_question" class="control-label col-md-2">Brand <span style="color:red">*</span></label>
 							<div class="col-md-10">	
 									<input type="hidden" class="form-control" name="brand_id" value="<?php echo $brand_id; ?>">				
-								<?php echo form_input(array('placeholder' => "Enter your brand",  'name'=>"brand_name",'class' => "form-control", 'value' => $brand_name)); ?>
+								<?php echo form_input(array('placeholder' => "Enter brand",  'name'=>"brand_name",'class' => "form-control", 'value' => $brand_name)); ?>
                                   <?php echo form_error('brand_name'); ?>
 								<div class="form-control-focus"> </div>			
 							</div>
@@ -64,13 +64,13 @@
 							    <input class="form-check-input" name="size_type_of_full" type="checkbox" <?php if(@$size_type['Full']) { ?> checked="checked" <?php } ?> value='Full'><label for="form_control_question" class="control-label ">Full</label>
 								</div>	
 							<div class="col-md-5">					
-								<?php echo form_input(array('placeholder' => "Enter your  Quantity !!!",  'name'=>"size_in_ml_of_full",'class' => "form-control", 'value' => @$size_in_ml['Full'])); ?>
+								<?php echo form_input(array('placeholder' => "Enter  Quantity",  'name'=>"size_in_ml_of_full",'class' => "form-control", 'value' => @$size_in_ml['Full'])); ?>
 			                   <?php echo form_error('size_in_ml_of_full'); ?>
 			                  <div class="form-control-focus"> </div>
 
 							</div>
 							<div class="col-md-5">					
-								<?php echo form_input(array('placeholder' => "Enter your Price !!!",  'name'=>"price_of_full",'class' => "form-control", 'value' => @$price['Full'])); ?>
+								<?php echo form_input(array('placeholder' => "Enter MRP",  'name'=>"price_of_full",'class' => "form-control", 'value' => @$price['Full'])); ?>
 			                  <?php echo form_error('price_of_full'); ?>
 			                  <div class="form-control-focus"> </div>
 			                  			
@@ -82,13 +82,13 @@
 							 
 							</div>
 							<div class="col-md-5">					
-								<?php echo form_input(array('placeholder' => "Enter your  Quantity !!!",  'name'=>"size_in_ml_of_half",'class' => "form-control", 'value' => @$size_in_ml['Half'])); ?>
+								<?php echo form_input(array('placeholder' => "Enter  Quantity",  'name'=>"size_in_ml_of_half",'class' => "form-control", 'value' => @$size_in_ml['Half'])); ?>
 			                   <?php echo form_error('size_in_ml_of_half'); ?>
 			                  <div class="form-control-focus"> </div>
 
 							</div>
 							<div class="col-md-5">					
-								<?php echo form_input(array('placeholder' => "Enter your Price !!!",  'name'=>"price_of_half",'class' => "form-control", 'value' => @$price['Half'])); ?>
+								<?php echo form_input(array('placeholder' => "Enter MRP",  'name'=>"price_of_half",'class' => "form-control", 'value' => @$price['Half'])); ?>
 			                   <?php echo form_error('price_of_half'); ?>
 			                  <div class="form-control-focus"> </div>
 			                  			
@@ -100,13 +100,13 @@
                             <label for="form_control_question" class="control-label" >Quarter</label>
 							</div> 
 							<div class="col-md-5">					
-								<?php echo form_input(array('placeholder' => "Enter your  Quantity !!!",  'name'=>"size_in_ml_of_quarter",'class' => "form-control", 'value' => @$size_in_ml['Quarter'])); ?>
+								<?php echo form_input(array('placeholder' => "Enter  Quantity",  'name'=>"size_in_ml_of_quarter",'class' => "form-control", 'value' => @$size_in_ml['Quarter'])); ?>
 			                  <?php echo form_error('size_in_ml_of_quarter'); ?>
 			                  <div class="form-control-focus"> </div>
 
 							</div>
 							<div class="col-md-5">					
-								<?php echo form_input(array('placeholder' => "Enter your Price !!!",  'name'=>"price_of_quarter",'class' => "form-control", 'value' => @$price['Quarter'])); ?>
+								<?php echo form_input(array('placeholder' => "Enter MRP",  'name'=>"price_of_quarter",'class' => "form-control", 'value' => @$price['Quarter'])); ?>
 			                  <?php echo form_error('price_of_quarter'); ?>
 			                  <div class="form-control-focus"> </div>
 			                  			

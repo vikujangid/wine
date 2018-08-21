@@ -3,7 +3,8 @@
 
 var ajaxRequested = false;
 $(document).ready(function() { 
-	$('.ajax_form').submit(function(event){
+	
+	$('body').on('submit', '.ajax_form', function(event){
 	
 	var $submitBTN = $(this).find('button[type="submit"]');
 	$submitBTN.attr('disabled','disabled');

@@ -12,14 +12,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $this->load->model('shops_model', 'shops');
             $this->load->model('shop_brands_model');
       	}
+      	function index($shop_id)
+      	{
+      		$output['left_menu'] = "";
+            $output['left_submenu'] = "";
+            $output['page_title'] = ""; 
 
+            $this->load->view('admin/includes/header', $output);
+            $this->load->view('admin/shop_brands/index'); 
+            $this->load->view('admin/includes/footer');
+
+      	}
         public function show($shop_id)
         {
       	  $output['left_menu'] = "";
           $output['left_submenu'] = "";
           $output['page_title'] = ""; 
         	$shop_name = $this->shop_brands_model->get_shop_name($shop_id);
-        	$all_brands = $this->shop_brands_model->get_all_brands();
+        	$all_brands = $this->shop_brands_model->get_brands($shop_id);
+          pr($all_brands); die;
           foreach ($all_brands as $key => $brands)
           {
             $brands->price_full = '';
@@ -58,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           $output['all_brands'] = $all_brands;
           $output['shop_name'] = $shop_name;
           $this->load->view('admin/includes/header', $output);
-          $this->load->view('admin/shop_brands/index'); 
+          $this->load->view('admin/shop_brands/add'); 
           $this->load->view('admin/includes/footer');
 
     		

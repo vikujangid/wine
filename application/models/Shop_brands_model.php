@@ -7,6 +7,29 @@
       { 
          parent::__construct(); 
       }
+      function get_brands($shop_id, $is_beer =NULL) /// this is in working state with shop_brand_controller
+      {
+          $this->db->select('tbl_wine_brands.id,brand_name,brand_img');
+          $this->db->select('tbl_shop_brands.brand_id, shop_id');
+          $this->db->where('tbl_shop_brands.shop_id', $shop_id);
+          $this->db->order_by('tbl_shop_brands.display_order', 'ASC');
+          $this->db->group_by('tbl_shop_brands.id');
+          $this->db->join('tbl_shop_brands', 'tbl_wine_brands.id = tbl_shop_brands.brand_id', 'LEFT');
+          $query = $this->db->get('tbl_wine_brands');
+          $result = $query->result();
+          return $result;
+      }
+      function get_my_brands($shop_id, $is_beer =NULL)
+      {
+          $this->db->select('tbl_wine_brands.id,brand_name,brand_img');
+          $this->db->select('tbl_shop_brands.brand_id, shop_id');
+          $this->db->where('tbl_shop_brands.shop_id', $shop_id);
+          $this->db->order_by('tbl_shop_brands.display_order', 'ASC');
+          $this->db->join('tbl_shop_brands', 'tbl_wine_brands.id = tbl_shop_brands.brand_id');
+          $query = $this->db->get('tbl_wine_brands');
+          $result = $query->result();
+          return $result;
+      }
       public function get_shop_name($shop_id)
       {
          $this->db->select('shop_name');
@@ -14,7 +37,7 @@
          $query = $this->db->get('tbl_shops');
          $result = $query->row();
          return $result->shop_name ? $result->shop_name : false;
-      }     
+      }
       public function get_all_brands() 
       {  
          $this->db->select('*');

@@ -35,7 +35,7 @@ $(function(){
 						      <tr>
 						        <th>Brand Name</th>
 						     
-						        <th>Status</th>
+						        
 						        
 						        <th>Options</th>
 						      </tr>
@@ -50,9 +50,7 @@ $(function(){
 								</td>
 
 								
-								<td>
-									<?php echo $value->status;?>
-								</td>
+								
 								<td class="text-center">
                                     <a href="<?php echo base_url('brands/update/'.$value->id); ?>" class="btn purple tooltips" data-original-title="Click to update this record" data-placement="top" data-container="body"><i class="fa fa-pencil"></i></a>
 									<a data-toggle="modal" data-id="<?php echo $value->id; ?>" data-url="<?php echo base_url('brands/delete/'.$value->id); ?>" class="btn btn-danger tooltips" onClick="deleteRecord(this);" data-original-title="Click to delete this shop" data-placement="top" data-container="body"><i class="fa fa-remove"></i></a>

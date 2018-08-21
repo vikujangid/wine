@@ -16,6 +16,7 @@ class Common_Model extends CI_Model
 		$row = $query->row();
 		
 		$this->setUserConfigData();
+		$this->session->set_userdata('shop_id', $this->get_selected_shop_id());
 	}
 	function setUserConfigData()
 	{
@@ -25,6 +26,15 @@ class Common_Model extends CI_Model
 			$this->config->set_item('username', $user->username);
 			$this->config->set_item('email', $user->email);
 		}
+	}
+	function get_selected_shop_id()
+	{
+		if($this->session->userdata('shop_id'))
+			return $this->session->userdata('shop_id');
+		
+		$this->load->model('shops_model', 'shops');
+		$shop = $this->shops->get_selected_shop();
+		return $shop->id;
 	}
 	
 	function _get_user($user_id)
@@ -79,6 +89,12 @@ class Common_Model extends CI_Model
 			show_404();
 		}
 		return true;
+	}
+	function get_shops()
+	{
+		$this->load->model('shops_model', 'shops');
+		$shops = $this->shops->get_records();
+		return $shops;
 	}
 	function removeFilesByLocationAndName($pathurl,$file_name)
 	{

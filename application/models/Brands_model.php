@@ -12,11 +12,19 @@
       {
          if ($status)
             $this->db->where('status', $status);
+         $this->db->order_by('brand_name', "ASC");
          $query = $this->db->get('tbl_wine_brands');
          $result = $query->result();
          return $result;
       }
-      function delete_brand_category($brand_id,$size_type=NULL)
+      function get_brand($id)
+      {
+         $this->db->where('id', $id);
+         $query = $this->db->get('tbl_wine_brands');
+         $result = $query->row();
+         return $result;
+      }
+      function delete_brand_category($brand_id, $size_type=NULL)
       {
          $this->db->where('brand_id', $brand_id);
 

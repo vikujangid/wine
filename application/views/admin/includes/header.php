@@ -47,19 +47,10 @@ $this->load->view('admin/includes/common'); ?>
 	<!-- BEGIN HEADER INNER -->
 	<div class="page-header-inner">
 		<!-- BEGIN LOGO -->
-		<div class="page-logo">
-			<a href="<?php echo site_url('sales'); ?>">
-			<!-- <img src="http://dummyimage.com/120x50/080208/e00000&text=LOGO+HERE" alt="logo" class="logo-default"/> -->
-			<img src="http://www.brandcrowd.com/gallery/brands/pictures/picture13674887863630.jpg" style="height:50px; width:200px;" alt="logo" class="logo-default"/>
-			</a>
-			<div class="menu-toggler sidebar-toggler">
-				<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
-			</div>
-		</div>
+		
 		<!-- END LOGO -->
 		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-		<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-		</a>
+		
 		<!-- END RESPONSIVE MENU TOGGLER -->
 		<!-- BEGIN PAGE ACTIONS -->
 		<!-- DOC: Remove "hide" class to enable the page header actions -->
@@ -98,10 +89,28 @@ $this->load->view('admin/includes/common'); ?>
 		</div> -->
 		<!-- END PAGE ACTIONS -->
 		<!-- BEGIN PAGE TOP -->
-
+		<script type="text/javascript">
+			function set_session_shop()
+			{
+				var session_shop_id = $("#session_shop_id").val();
+				$.getJSON(siteurl+'settings/set_session_shop/'+session_shop_id, function(data){
+					if(data.success)
+					{
+						window.location.href = data.redirectURL;
+					}
+				})
+			}
+		</script>
 		<div class="page-top">
 
-						
+				<div style="margin-right: 22px; margin-top: 16px; width: 250px;" class="form-group">
+				<?php $shops_com = $this->common_model->get_shops(); ?>
+				<select onchange="set_session_shop()" id="session_shop_id" class="form-control">
+					<?php foreach ($shops_com as $key => $value) { ?>
+						<option value="<?php echo $value->id; ?>" <?php if($this->session->userdata('shop_id') == $value->id) { ?> selected <?php } ?> ><?php echo $value->shop_name; ?></option>	
+					<?php } ?>
+				</select>
+			</div>		
 					
 			<!-- BEGIN HEADER SEARCH BOX -->
 			<!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->

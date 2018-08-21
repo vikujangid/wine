@@ -35,11 +35,26 @@
 								<div class="form-control-focus"> </div>		
 
 							</div>
+						</div>    
+
+						<div class="form-group form-md-line-input">
+							<label  class="control-label col-md-3">Its a Branch of <span style="color:red"></span></label>
+							 <div class="col-md-9">					
+								<select name="parent_shop_id" class="form-control">
+									<option value="">This shop is not A Branch</option>
+									<?php foreach ($parent_shops as $key => $value) { ?>
+										
+										<option <?php if($value->id == $parent_shop_id) { ?> selected <?php } ?> value="<?php echo $value->id; ?>"><?php echo $value->shop_name; ?></option>
+									<?php } ?>
+								</select>
+								<div class="form-control-focus"> </div>		
+
+							</div>
 						</div>                                	
 						 
 
                         <div class="form-group form-md-line-input">
-							<label  class="control-label col-md-3">Owner name <span style="color:red">*</span></label>
+							<label  class="control-label col-md-3">Owner name <span style="color:red"></span></label>
 							 <div class="col-md-9">					
 								<?php echo form_input(array('placeholder' => "Enter Owner name ",'name'=>"shop_owner_name",'class' => "form-control", 'value' => $shop_owner_name)); ?>
                                 <?php echo form_error('shop_owner_name'); ?>
@@ -50,9 +65,9 @@
 
 
 						<div class="form-group form-md-line-input">
-							<label  class="control-label col-md-3">Address<span style="color:red">*</span></label>
+							<label  class="control-label col-md-3">Address<span style="color:red"></span></label>
 							 <div class="col-md-9">					
-								<?php echo form_input(array('placeholder' => "Enter shop Address ",'name'=>"shop_address",'class' => "form-control", 'value' => $shop_address)); ?>
+								<?php echo form_input(array('placeholder' => "Enter Shop Address ",'name'=>"shop_address",'class' => "form-control", 'value' => $shop_address)); ?>
                                 <?php echo form_error('shop_address'); ?>
 								<div class="form-control-focus"> </div>			
 							</div>
@@ -61,7 +76,7 @@
 
 
 						<div class="form-group form-md-line-input">
-							<label  class="control-label col-md-3">City <span style="color:red">*</span></label>
+							<label  class="control-label col-md-3">City <span style="color:red"></span></label>
 							 <div class="col-md-9">					
 								<?php echo form_input(array('placeholder' => "Enter City ",'name'=>"shop_address_city",'class' => "form-control", 'value' => $shop_address_city)); ?>
                                  <?php echo form_error('shop_address_city'); ?>
@@ -73,7 +88,7 @@
 
 
 						<div class="form-group form-md-line-input">
-							<label  class="control-label col-md-3">Zip Code <span style="color:red">*</span></label>
+							<label  class="control-label col-md-3">Zip Code <span style="color:red"></span></label>
 							 <div class="col-md-9">					
 								<?php echo form_input(array('placeholder' => "Enter Zip Code",'name'=>"shop_address_zip_code",'class' => "form-control", 'value' => $shop_address_zip_code)); ?>
                                  <?php echo form_error('shop_address_zip_code'); ?>
@@ -82,9 +97,9 @@
 						</div>
 
                            <div class="form-group form-md-line-input">
-							<label  class="control-label col-md-3">Primary Contact Number <span style="color:red">*</span></label>
+							<label  class="control-label col-md-3">Shop Contact Number <span style="color:red"></span></label>
 							 <div class="col-md-9">					
-								<?php echo form_input(array('placeholder' => "Enter City ",'name'=>"shop_primary_contact_number",'class' => "form-control", 'value' => $shop_primary_contact_number)); ?>
+								<?php echo form_input(array('placeholder' => "Enter Shop Contact Number ",'name'=>"shop_primary_contact_number",'class' => "form-control", 'value' => $shop_primary_contact_number)); ?>
                                  <?php echo form_error('shop_primary_contact_number'); ?>
 								<div class="form-control-focus"> </div>			
 							</div>
@@ -93,7 +108,7 @@
 
 
 						<div class="form-group form-md-line-input">
-							<label  class="control-label col-md-3">Owner Mobile Number <span style="color:red">*</span></label>
+							<label  class="control-label col-md-3">Owner Mobile Number <span style="color:red"></span></label>
 							 <div class="col-md-9">					
 								<?php echo form_input(array('placeholder' => "Owner Mobile Number",'name'=>"shop_owner_mobile_number",'class' => "form-control", 'value' => $shop_owner_mobile_number)); ?>
                                 <?php echo form_error('shop_owner_mobile_number'); ?>
@@ -104,7 +119,7 @@
 
 
 						<div class="form-group form-md-line-input">
-							<label  class="control-label col-md-3">Email Address <span style="color:red">*</span></label>
+							<label  class="control-label col-md-3">Email Address <span style="color:red"></span></label>
 							 <div class="col-md-9">					
 								<?php echo form_input(array('placeholder' => "Email Address",'name'=>"shop_email_address",'class' => "form-control", 'value' => $shop_email_address)); ?>
                                 <?php echo form_error('shop_email_address'); ?>

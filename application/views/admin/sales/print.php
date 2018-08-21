@@ -159,7 +159,7 @@ $this->load->view('admin/includes/common'); ?>
                       </tr>
                     <?php } ?>
 
-                    <tr><td>Extra Expenses</td><td colspan="5" width=""><?php echo $total_expenses; ?></td><td><strong><?php echo $daily_total + $total_expenses; ?></strong></td></tr>
+                    <tr><td>Extra Expenses</td><td colspan="5" width=""><?php echo $total_expenses; ?></td><td><strong><?php echo $daily_total - $total_expenses; ?> / <?php echo $daily_total; ?></strong></td></tr>
                   
              
            

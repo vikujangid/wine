@@ -10,7 +10,8 @@
       }
 
       function get_records() 
-      {  
+      { 
+          $this->db->where('status', 'Active'); 
           $query = $this->db->get($this->table);
           $result = $query->result();
           return $result;
@@ -22,10 +23,32 @@
           $query = $this->db->get($this->table);
           $result = $query->row();
           return $result->shop_name?$result->shop_name:NULL;
+      }
+      function get_parent_shops_only()
+      {
+          $this->db->where('status', 'Active');
+          $this->db->where('parent_shop_id', NULL);
+          $query = $this->db->get($this->table);
+          $result = $query->result();
+          return $result;
+      }
+      function get_selected_shop()
+      {
+          $this->db->where('status', 'Active');
+          $this->db->order_by('is_selected', 'DESC');
+          $query = $this->db->get($this->table);
+          $result = $query->row();
+          return $result;
+      }
+      function set_selected_shop($shop_id)
+      {
+          $this->db->set('is_selected', 'No');
+          $this->db->update($this->table);
 
-
-
-   }
+          $this->db->set('is_selected', 'Yes');
+          $this->db->where('id', $shop_id);
+          $this->db->update($this->table);
+      }
 
 
 

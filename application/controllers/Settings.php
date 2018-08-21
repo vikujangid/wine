@@ -10,14 +10,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             parent::__construct();
             if(!$this->session->userdata('user_id'))
             return redirect('login'); 
-            $this->load->library('form_validation');
-            $this->load->helper('form');
-            $this->load->helper('url');
-            $this->load->library('email');
-            $this->load->library('session'); 
-            $this->load->helper('string');
-           	$this->load->database();
+           
             $this->load->model('settings_model');
+            $this->load->model('shops_model', 'shops');
       	}
       	
       	public function settings()
@@ -80,7 +75,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    	$this->load->view('includes/header');
         	$this->load->view('settings/settings',$output); 
         	$this->load->view('includes/footer');
-        } 
+        }
+        function set_session_shop($shop_id)
+        {
+        	if($shop_id)
+        	{
+        		$this->session->set_userdata('shop_id', $shop_id);
+        		$this->shops->set_selected_shop($shop_id);
+        		$data['success'] = TRUE;
+        		$data['redirectURL'] = site_url();
+        		echo json_encode($data); die;
+        	}
+        }
 	   
         
 		      

@@ -32,7 +32,7 @@
                     	<div class="form-group form-md-line-input">
 							<label for="form_control_question" class="control-label col-md-2">Brand <span style="color:red">*</span></label>
 							<div class="col-md-10">					
-								<?php echo form_input(array('placeholder' => "Enter your brand",  'name'=>"brand_name",'class' => "form-control", 'value' => " $brand_name ")); ?>
+								<?php echo form_input(array('placeholder' => "Enter brand",  'name'=>"brand_name",'class' => "form-control", 'value' => " $brand_name ")); ?>
                                  
 								<div class="form-control-focus"> </div>
 								 <?php echo form_error('brand_name'); ?>			
@@ -58,7 +58,7 @@
                           <div class="form-group form-md-line-input">
 							<label for="form_control_question" class="control-label col-md-2">Quantity <span style="color:red">*</span></label>
 							<div class="col-md-10">					
-								<?php echo form_input(array('placeholder' => "Enter your Quantity", 'name'=>"size_in_ml", 'class' => "form-control", 'value' => "$size_in_ml")); ?>
+								<?php echo form_input(array('placeholder' => "Enter Quantity", 'name'=>"size_in_ml", 'class' => "form-control", 'value' => "$size_in_ml")); ?>
 								<?php echo form_error('size_in_ml'); ?>
 								<div class="form-control-focus"> </div>			
 							</div>
@@ -66,7 +66,7 @@
 						<div class="form-group form-md-line-input">
 							<label for="form_control_question"  class="control-label col-md-2">Price <span style="color:red">*</span></label>
 							<div class="col-md-10">					
-								<?php echo form_input(array('placeholder' => "Enter your Price", 'name'=>"price", 'class' => "form-control", 'value' => "$price")); ?>
+								<?php echo form_input(array('placeholder' => "Enter Price", 'name'=>"price", 'class' => "form-control", 'value' => "$price")); ?>
 								<?php echo form_error('price'); ?>
 								<div class="form-control-focus"> </div>			
 							</div>
