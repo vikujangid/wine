@@ -234,6 +234,14 @@ class Sales extends CI_Controller
       echo json_encode($response); die;
 
   }
+  function delete_direct_sale($sale_id)
+  {
+    $this->direct_solds->delete_record($sale_id);
+    $response['success'] = true;
+    $response['message'] = 'Deleted';
+    echo json_encode($response); die;
+
+  }
   function add_expense($shop_id)
   {
 
@@ -266,7 +274,8 @@ class Sales extends CI_Controller
             
             if (!$failure) {
                 $success = TRUE;
-                $data['redirectURL'] = site_url('expenses/show/'.$shop_id);
+                $data['callBackFunction'] = 'callback_expense_added';
+                $data['resetForm'] = true;
 
             } else {
                 $success = FALSE;

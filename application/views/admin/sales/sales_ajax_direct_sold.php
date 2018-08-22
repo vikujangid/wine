@@ -4,7 +4,7 @@
 <div>
 <table class="table table-bordered">
     <thead>
-        <th>Quantity</th><th>Sold To</th><th>Amount / Quantity</th>
+        <th>Quantity</th><th>Sold To</th><th>Amount / Quantity</th><th>Options</th>
     </thead>
     <tbody>
         <?php $total_quantity = 0; $total_price = 0; ?>
@@ -14,11 +14,15 @@
             <td><?php echo $value->quantity; ?></td>
             <td><?php echo $value->buyer_name; ?></td>
             <td><?php echo $value->quantity; ?> X <?php echo $value->price_per_quantity; ?> = <?php echo $value->price_total; ?></td>
+            <td>
+                <a href="javascript:" class="btn btn-danger" onclick="delete_direct_sale(this)" data-url="<?php echo site_url('sales/delete_direct_sale/'.$value->id); ?>"> <i class="fa fa-remove"></i></a>
+            </td>
         </tr>
         <?php } ?>
         <tr>
             <td colspan="2">Total: <?php echo $total_quantity; ?></td>
             <td><?php echo $total_price; ?></td>
+            <td></td>
         </tr>
     </tbody>
 </table>

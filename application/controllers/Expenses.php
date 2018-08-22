@@ -42,6 +42,13 @@ class Expenses extends CI_Controller
        $this->expensive->delete_record($id);
        redirect('expenses');
     }
+    public function delete_ajax($id)
+    {
+       $this->expensive->delete_record($id);
+       $data['success'] = TRUE;
+       $data['message'] = 'Expense deleted';
+       json_encode($data); die;
+    }
     public function add($shop_id)
     {
         $output['left_menu'] = "Expenses";
@@ -78,7 +85,7 @@ class Expenses extends CI_Controller
             
             if (!$failure) {
                 $success = TRUE;
-                $data['redirectURL'] = site_url('expenses/show/'.$shop_id);
+                $data['callBackFunction'] = 'callback_expense_added';
 
             } else {
                 $success = FALSE;

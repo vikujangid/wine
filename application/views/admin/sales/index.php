@@ -35,7 +35,7 @@ $(function(){
             
             <div class="col-md-7">
               
-              <div class="row">
+              <div class="row" style="padding-bottom: 20px;">
                 <div class="col-md-12">
                   <div class="ajax_content_inner">
                     
@@ -146,6 +146,31 @@ $(function(){
       getsize();
       get_expenses();
       get_direct_solds();
+  }
+  function delete_expense($this)
+  {
+    var con = confirm("Are you sure want to delete it?");
+    if(!con)
+      return false;
+    var url = $($this).attr('data-url');
+    $.getJSON(url, function(data){
+      get_expenses();
+    })
+  }
+  function delete_direct_sale($this)
+  {
+    var con = confirm("Are you sure want to delete it?");
+    if(!con)
+      return false;
+    var url = $($this).attr('data-url');
+    $.getJSON(url, function(data){
+      get_direct_solds();
+    })
+  }
+  function callback_expense_added()
+  {
+    $("#add_expense_modal").modal('hide');
+    get_expenses();
   }
     function getsize()
     {

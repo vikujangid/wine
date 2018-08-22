@@ -23,6 +23,11 @@ class Direct_sold_model extends CI_Model {
         $query = $this->db->get($this->table);
         return $query->row();
    }
+    function delete_record($id) 
+    {
+        $this->db->where('id',$id);
+        $this->db->delete($this->table);
+    }
    function add_record($data)
    {
         $this->db->set('add_date', date('Y-m-d H:i:s'));
