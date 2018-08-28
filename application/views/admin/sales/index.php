@@ -54,7 +54,7 @@ $(function(){
               </div>
             </div>
             <div class="col-md-3">
-              <div class="img"></div>
+              <!-- <div class="img"></div> -->
               <div class="ajax_total_chart"></div>
             </div>
       </div>

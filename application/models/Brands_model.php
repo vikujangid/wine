@@ -24,6 +24,14 @@
          $result = $query->row();
          return $result;
       }
+      public function get_brand_name($brand_id)
+      {
+         $this->db->select('brand_name');
+         $this->db->where('id',$brand_id);
+         $query = $this->db->get('tbl_wine_brands');
+         $result = $query->row();
+         return $result->brand_name?$result->brand_name:false;
+      }
       function delete_brand_category($brand_id, $size_type=NULL)
       {
          $this->db->where('brand_id', $brand_id);

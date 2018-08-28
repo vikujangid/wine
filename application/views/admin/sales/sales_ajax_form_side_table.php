@@ -1,4 +1,4 @@
-
+<h4><?php echo $brand_name; ?></h4>
 <table class="table table-bordered">
     <tbody>
         <?php foreach ($sizes2 as $key => $value) { ?>

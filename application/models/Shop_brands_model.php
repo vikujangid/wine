@@ -10,7 +10,7 @@
       function get_brands($shop_id, $is_beer =NULL) /// this is in working state with shop_brand_controller
       {
           $this->db->select('tbl_wine_brands.id,brand_name,brand_img');
-          $this->db->select('tbl_shop_brands.brand_id, shop_id');
+          $this->db->select('tbl_shop_brands.brand_id, shop_id, price_full, price_half, price_quarter, display_order');
           $this->db->where('tbl_shop_brands.shop_id', $shop_id);
           $this->db->order_by('tbl_shop_brands.display_order', 'ASC');
           $this->db->group_by('tbl_shop_brands.id');
@@ -41,6 +41,7 @@
       public function get_all_brands() 
       {  
          $this->db->select('*');
+         $this->db->where('status', 'Active');
          $query = $this->db->get('tbl_wine_brands');
          return $query->result();
       }

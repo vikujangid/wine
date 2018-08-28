@@ -96,6 +96,7 @@ class Sales extends CI_Controller
     function get_product_sale_quantity_for_daily_report()
     {
         $brand_id = $this->input->get('brand_id');
+        $brand_name = $this->brands->get_brand_name($brand_id);
       	$shop_id = $this->shop_id;
       	$date = date("Y-m-d", strtotime($this->input->get('date')));
       	$this->session->set_userdata('date', $date);
@@ -125,13 +126,14 @@ class Sales extends CI_Controller
 		        $sizes[$value->size_type]['quantity_sold'] = $result->quantity_sold;
 	        }
       	}
+
       	foreach ($sizesType as $key => $value) {
       		$sizes2[$value->size_type]['size_type'] = $value->size_type;
       		$sizes2[$value->size_type]['quantity_sold'] = 0;
       		$sizes2[$value->size_type]['rate_per_unit'] = $value->price;
       		$result = $this->product_list->get_sold_units($brand_id,$date,$shop_id,$value->size_type);
 
-      		if ($result) {
+      	  if ($result) {
       			
       			$sizes2[$value->size_type]['quantity_sold'] = $result->quantity_sold;
       			$sizes2[$value->size_type]['rate_per_unit'] = $result->rate_per_unit;
@@ -139,6 +141,8 @@ class Sales extends CI_Controller
       	}
         $total_sales_prices = $this->product_sales->get_total_price($shop_id, $date, $brand_id);
         $total_expenses = $this->expenses->get_total_expenses($shop_id, $date, $date);
+        
+        $output['brand_name'] = $brand_name;
         $output['sizes'] = $sizes;
         
 
